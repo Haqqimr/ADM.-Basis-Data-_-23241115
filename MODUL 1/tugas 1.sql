@@ -1,13 +1,13 @@
--- Nama : zofita amalia wati
--- NIM : 23241085
+-- Nama : Zainul Haqqi Mr
+-- NIM : 23241115
 -- Kelas : C
 -- Modul : Modul 1 Data Definition Leanguage
 
 -- Membuat Database
-create database pti_mart2;
+create database zoha_mart;
 
 -- Menggunakan Database
-use PTI_mart2;
+use zoha_mart;
 
 -- Membuat Tabel
 create table ms_pelanggan_dqlab(
@@ -28,19 +28,19 @@ stok int(15)
 
 -- Membuat Tabel dengan Foreign Key (relasi)
 create table tr_penjualan_dqlab(
-id_transaksi int not null primary key,
+id_transaksi int primary key not null,
 tgl_transaksi date,
 id_produk int,
 id_pelanggan int,
 qty int,
 total_harga int,
-foreign key (id_produk) references produk (id_produk),
-foreign key (id_pelanggan) references tr_penjualan_dqlab (id_pelanggan)
+foreign key (id_produk) references ms_produk_dqlab (id_produk),
+foreign key (id_pelanggan) references ms_pelanggan_dqlab (id_pelanggan)
 );
 
 -- mengisi data dalam table
 insert  into ms_pelanggan_dqlab(
-kode_pelanggan, no_urut, nama_pelanggan, alamat
+id_pelanggan, nama_pelanggan, alamat, kota, no_tlp
 )values
 (001,"zof","Mataram","Kota Mataram",081),
 (002,"zofi","Sikur","Lotim",087),
