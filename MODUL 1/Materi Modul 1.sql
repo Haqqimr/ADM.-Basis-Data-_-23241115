@@ -1,76 +1,76 @@
--- Nama  : Zainul Haqqi Mr
--- Nim   : 23241115
+-- Nama : Zainul Haqqi Mr
+-- NIM : 23241115
 -- Kelas : C
--- Modul : Modul 1 Data Definisian Language
+-- Modul : Modul 1 Data Definition Leanguage
 
--- Membuat DataBase 
-CREATE DATABASE pti_mart;
-USE pti_mart;
+-- Membuat Database
+create database PTI_mart;
 
--- MEMBUAT Table
-CREATE TABLE PeLanggan(
+-- Menggunakan Database
+use PTI_mart;
+
+-- Membuat Tabel
+create table Pelanggan(
 id_pelanggan int PRIMARY KEY NOT NULL,
-nama_pelanggan 	VARCHAR (50),
-alamat VARCHAR (100),
-kota VARCHAR (20),
-no_tlp VARCHAR (15)
+nama_pelanggan VARCHAR(50),
+alamat VARCHAR(100),
+kota VARCHAR(15),
+no_tlp VARCHAR(15)
 );
 
-CREATE TABLE Produk(
-id_produk int PRIMARY KEY NOT NULL,
-nama_produk VARCHAR (50),
-kategori VARCHAR (20),
-harga VARCHAR (20),
-stok int (10)
+create table produk(
+id_produk int primary key not null,
+nama_produk varchar(50),
+kategori varchar(50),
+harga int(15),
+stok int(15)
 );
 
-
--- membuat tabel dengan forign key
-CREATE TABLE transaksi(
-id_transaksi int PRIMARY KEY NOT NULL,
-TGL_TRANSAKSI date,
+-- Membuat Tabel dengan Foreign Key (relasi)
+create table Transaksi(
+id_transaksi int not null primary key,
+tgl_transaksi date,
 id_produk int,
 id_pelanggan int,
 qty int,
 total_harga int,
-foreign key (id_produk) references PRODUK (id_produk),
-foreign key (id_pelanggan) references pelanggan (id_pelanggan)
+foreign key (id_produk) references produk (id_produk),
+foreign key (id_pelanggan) references Pelanggan (id_pelanggan)
 );
 
--- mengisi data dalam tabel
-insert into pelanggan(
+-- mengisi data dalam table
+insert  into Pelanggan(
 id_pelanggan, nama_pelanggan, alamat, kota, no_tlp
 )values
-(1, 'Ahmad Sulaiman', 'Jl. Mataram No. 10', 'Mataram', '0812-3456-7890'),
-(2, 'Rina Wulandari', 'Jl. Gomong No. 5', 'Ampenan', '0821-2345-6789'),
-(3, 'Budi Santoso', 'Jl. Sekarbela No. 15', 'Mataram', '0831-3456-7890'),
-(4, 'Siti Nurhaliza', 'Jl. Monjok No. 20', 'Mataram', '0841-4567-8901'),
-(5, 'Joko Prabowo', 'Jl. Ampenan No. 8', 'Ampenan', '0851-5678-9012');
+(001,"Azhari","Mataram","Kota Mataram",081),
+(002,"Alpi","Sikur","Lotim",087),
+(003,"Zulfi","Narmada","Sumbawa",083),
+(004,"Dodi","Ampenan","Loteng",084),
+(005,"Michan","Labu Api","Kota Mataram",085);
 
--- masukkan data ke tabel produk
 insert into produk(
 id_produk, nama_produk, kategori, harga, stok
 )values
-(006,"buku tulis","alat tulis",5000,50),
-(007,"penghapus","alat tulis",1500,35),
-(008,"penggaris","alat tulis",3000,25),
-(009,"pulpen","alat tulis",4000,40),
-(010,"spidol","alat tulis",6000,15);
+(001,"pensil","alat tulis",2000,20),
+(002,"pensil","alat tulis",2000,20),
+(003,"pensil","alat tulis",2000,20),
+(004,"pensil","alat tulis",2000,20),
+(005,"pensil","alat tulis",2000,20);
 
 -- masukkan data ke table yang ada foreign key
 insert into transaksi
-set id_transaksi = 1002,
-tgl_transaksi = "2025-02-01",
+set id_transaksi = 1001,
+tgl_transaksi = "2025-01-01",
 id_produk = (
 select id_produk from produk
-where id_produk = 006),
+where id_produk = 111),
 id_pelanggan = (
 select id_pelanggan from Pelanggan
-where id_pelanggan = 002),
-qty = 2,
+where id_pelanggan = 001),
+qty = 1,
 total_harga = (
 select harga from produk
-where id_produk = 006) * 2;
+where id_produk = 111) * qty;
 
 -- cek data apkh sdh msk
 select * from Pelanggan;
